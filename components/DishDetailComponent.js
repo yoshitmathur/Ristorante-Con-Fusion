@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, View } from 'react-native';
 import { Card } from 'react-native-elements';
 
-function RenderDish(props) {
+const RenderDish = (props) => {
 
     const dish = props.dish;
     
@@ -22,7 +22,7 @@ function RenderDish(props) {
         }
 }
 
-function Dishdetail(props) {
+const Dishdetail = (props) => {
     return(<RenderDish dish={props.dish} />);
 }
 
