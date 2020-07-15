@@ -5,6 +5,8 @@ import { FlatList, ScrollView } from 'react-native-gesture-handler';
 import {connect} from 'react-redux';
 import {baseUrl} from '../shared/baseUrl';
 
+import { Loading } from './LoadingComponent';
+
 const History = () => (
     <Card title='History'>
         <Text>
@@ -33,7 +35,29 @@ class AboutComponent extends Component {
                 subtitle = {item.description}
                 leftAvatar={{source: {uri: baseUrl + item.image}}}
                 hideCheveron = {true} />
-        ) ; 
+        );
+        
+        if(this.props.leaders.isLoading){
+            return(
+                <ScrollView>
+                    <History />
+                    <Card title='Corporate Leadership'>
+                        <Loading />
+                    </Card>
+                </ScrollView>
+            );
+        }
+
+        else if (this.props.leaders.errMess) {
+            return(
+                <ScrollView>
+                    <History />
+                    <Card title='Corporate Leadership'>
+                        <Text>{this.props.leaders.errMess}</Text>
+                    </Card>
+                </ScrollView>
+            );
+        }
 
         return(
             <ScrollView>
