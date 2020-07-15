@@ -4,13 +4,15 @@ import { createStackNavigator } from "react-navigation-stack";
 import { createDrawerNavigator, DrawerItems } from "react-navigation-drawer";
 import { createAppContainer, SafeAreaView } from "react-navigation";
 import { Icon } from 'react-native-elements';
+import { ScrollView } from 'react-native-gesture-handler';
+import {connect} from 'react-redux';
 
 import Home from "./HomeComponent";
 import Menu from './MenuComponent';
 import Contact from './ContactComponent';
 import About from './AboutComponent';
 import Dishdetail from './DishDetailComponent';
-import { ScrollView } from 'react-native-gesture-handler';
+import { fetchComments, fetchDishes, fetchLeaders, fetchPromos } from '../redux/ActionCreators'
 
 const MenuNavigator = createAppContainer(createStackNavigator({
     Menu: { 
@@ -157,6 +159,13 @@ const MainNavigator = createAppContainer(createDrawerNavigator({
 
 class Main extends Component {
 
+    componentDidMount() {
+        this.props.fetchDishes();
+        this.props.fetchComments();
+        this.props.fetchPromos();
+        this.props.fetchLeaders();
+    }
+
   render() {
  
     return (
@@ -192,8 +201,26 @@ const styles = StyleSheet.create({
     }
 });
 
+
+const mapStateToProps = state => {
+    return {
+      dishes: state.dishes,
+      comments: state.comments,
+      promotions: state.promotions,
+      leaders: state.leaders
+    }
+}
+
+
+const mapDispatchToProps = dispatch => ({
+    fetchDishes: () => dispatch(fetchDishes()),
+    fetchComments: () => dispatch(fetchComments()),
+    fetchPromos: () => dispatch(fetchPromos()),
+    fetchLeaders: () => dispatch(fetchLeaders()),
+})
+
   
-export default Main;
+export default connect(mapStateToProps, mapDispatchToProps)(Main);
 
 
 
