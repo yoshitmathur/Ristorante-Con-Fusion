@@ -31,6 +31,12 @@ export const addComments = (comments) => ({
     payload: comments
 });
 
+
+
+
+
+
+
 export const fetchDishes = () => (dispatch) => {
 
     dispatch(dishesLoading());
@@ -68,6 +74,10 @@ export const addDishes = (dishes) => ({
     payload: dishes
 });
 
+
+
+
+
 export const fetchPromos = () => (dispatch) => {
     
     dispatch(promosLoading());
@@ -104,6 +114,10 @@ export const addPromos = (promos) => ({
     type: ActionTypes.ADD_PROMOS,
     payload: promos
 });
+
+
+
+
 
 export const fetchLeaders = () => (dispatch) => {
     
@@ -145,6 +159,7 @@ export const addLeaders = (leaders) => ({
 
 
 
+
 export const postFavorite = (dishId)  => (dispatch) => {
 
     setTimeout(() => {
@@ -157,3 +172,47 @@ export const addFavorite = (dishId) => ({
     type: ActionTypes.ADD_FAVORITE,
     payload: dishId
 });
+
+
+
+
+export const addComment = (comment) => ({
+    type: ActionTypes.ADD_COMMENT,
+    payload: comment
+});
+
+export const postComment = (dishId, rating, comment, author, id)  => (dispatch) => {
+
+    const newComment = {
+        id: id,
+        dishId: dishId,
+        rating: rating,
+        comment: comment,
+        author: author,
+    }
+    newComment.date = new Date().toISOString();
+
+    return fetch(baseUrl + 'comments', {
+        method: 'POST',
+        body: JSON.stringify(newComment),
+        headers: {
+            Accept: 'application/json',
+            "Content-Type": "application/json"
+        }
+    }).then(response => {
+        if (response.ok) {
+            return response;
+        } else {
+            var error = new Error('Error ' + response.status + ': ' + response.statusText);
+            error.response = response;
+            throw error;
+        }
+        },
+        error => {
+            var errmess = new Error(error.message);
+            throw errmess;
+        })
+    .then(response => response.json())
+    .then(comment => dispatch(addComment(comment)))
+    .catch(error => { console.log('post comments', errorr.message); alert('Your comment cannot be posted\nError: ' + error.message); });
+};
