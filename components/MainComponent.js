@@ -13,7 +13,8 @@ import Menu from './MenuComponent';
 import Contact from './ContactComponent';
 import About from './AboutComponent';
 import Dishdetail from './DishDetailComponent';
-import Reservation from './ReservationComponent'
+import Reservation from './ReservationComponent';
+import Favorites from './FavoriteComponent';
 
 const MenuNavigator = createAppContainer(createStackNavigator({
     Menu: { 
@@ -70,6 +71,23 @@ const ContactNavigator = createAppContainer(createStackNavigator({
 const AboutNavigator = createAppContainer(createStackNavigator({
     About: { 
         screen: About,
+        navigationOptions: ({navigation}) => ({
+            headerStyle: {
+                backgroundColor: '#512da8'
+            },
+            headerTintColor: '#fff',
+            headreTitleStyle: {
+                color: '#fff'
+            },
+            headerLeft: <Icon name='menu' size={24} color='white' onPress={()=>navigation.toggleDrawer()} />
+        }) 
+    }
+},
+));
+
+const FavoriteNavigator = createAppContainer(createStackNavigator({
+    Favorites: { 
+        screen: Favorites,
         navigationOptions: ({navigation}) => ({
             headerStyle: {
                 backgroundColor: '#512da8'
@@ -168,6 +186,17 @@ const MainNavigator = createAppContainer(createDrawerNavigator({
             drawerLabel: 'Contact Us',
             drawerIcon: ({tintColor}) => (
                 <Icon name='address-card' size={22} color={tintColor} type='font-awesome' /> 
+            )
+        }
+    },
+
+    Favorites: {
+        screen: FavoriteNavigator,
+        navigationOptions: {
+            title: 'My Favorites',
+            drawerLabel: 'My Favorites',
+            drawerIcon: ({tintColor}) => (
+                <Icon name='heart' size={22} color={tintColor} type='font-awesome' /> 
             )
         }
     },
