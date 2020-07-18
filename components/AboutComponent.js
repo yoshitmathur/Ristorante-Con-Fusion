@@ -4,6 +4,7 @@ import { Card, ListItem } from 'react-native-elements';
 import { FlatList, ScrollView } from 'react-native-gesture-handler';
 import {connect} from 'react-redux';
 import {baseUrl} from '../shared/baseUrl';
+import * as Animatable from 'react-native-animatable';
 
 import { Loading } from './LoadingComponent';
 
@@ -40,10 +41,12 @@ class AboutComponent extends Component {
         if(this.props.leaders.isLoading){
             return(
                 <ScrollView>
-                    <History />
-                    <Card title='Corporate Leadership'>
-                        <Loading />
-                    </Card>
+                    <Animatable.View animation='fadeInDown' duration= {2000} delay= {1000}>
+                        <History />                    
+                        <Card title='Corporate Leadership'>
+                            <Loading />
+                        </Card>
+                    </Animatable.View>
                 </ScrollView>
             );
         }
@@ -51,24 +54,28 @@ class AboutComponent extends Component {
         else if (this.props.leaders.errMess) {
             return(
                 <ScrollView>
-                    <History />
-                    <Card title='Corporate Leadership'>
-                        <Text>{this.props.leaders.errMess}</Text>
-                    </Card>
+                    <Animatable.View animation='fadeInDown' duration= {2000} delay= {1000}>
+                        <History />
+                        <Card title='Corporate Leadership'>
+                            <Text>{this.props.leaders.errMess}</Text>
+                        </Card>
+                    </Animatable.View>
                 </ScrollView>
             );
         }
 
         return(
             <ScrollView>
-                <History />
-                <Card title='Corporate Leadership'>
-                    <FlatList 
-                        data={this.props.leaders.leaders}
-                        renderItem={renderLeader}
-                        keyExtractor={item => item.id.toString()}
-                    />
-                </Card>
+                <Animatable.View animation='fadeInDown' duration= {2000} delay= {1000}>
+                    <History />
+                    <Card title='Corporate Leadership'>
+                        <FlatList 
+                            data={this.props.leaders.leaders}
+                            renderItem={renderLeader}
+                            keyExtractor={item => item.id.toString()}
+                            />
+                    </Card>
+                </Animatable.View>
             </ScrollView>
             
         );

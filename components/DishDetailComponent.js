@@ -3,6 +3,7 @@ import { Text, View, ScrollView, FlatList, Modal, StyleSheet, Button } from 'rea
 import { Card, Icon, Rating, Input } from 'react-native-elements';
 import {connect} from 'react-redux';
 import {baseUrl} from '../shared/baseUrl';
+import * as Animatable from 'react-native-animatable';
 
 import { postFavorite } from '../redux/ActionCreators';
 import { postComment } from '../redux/ActionCreators';
@@ -13,35 +14,38 @@ const RenderDish = (props) => {
 
     if(dish!=null){
         return(
-            <Card 
-                featuredTitle={dish.name}
-                //image={require('./images/uthappizza.png')}>
-                image={{uri:baseUrl+dish.image}} 
-            >
-                <Text>
-                    {dish.description}
-                </Text>
-                <View style={{flexDirection:'row', justifyContent:'center'}}>
-                    <Icon 
-                        raised
-                        reverse
-                        name={props.favorite ? 'heart' : 'heart-o'}
-                        type='font-awesome'
-                        color= '#f50'
-                        onPress ={()=>props.favorite ? console.log('Alerady') : props.onPress()}
-                    >
-                    </Icon>
-                    <Icon 
-                        raised
-                        reverse
-                        name='pencil'
-                        type='font-awesome'
-                        color= '#512da8'
-                        onPress ={()=>props.onSelect()}
-                    >
-                    </Icon>
-                </View>
-            </Card>
+            <Animatable.View animation='fadeInDown' duration= {2000} delay= {1000}>
+                <Card 
+                    featuredTitle={dish.name}
+                    //image={require('./images/uthappizza.png')}>
+                    image={{uri:baseUrl+dish.image}} 
+                >
+                    <Text>
+                        {dish.description}
+                    </Text>
+                    <View style={{flexDirection:'row', justifyContent:'center'}}>
+                        <Icon 
+                            raised
+                            reverse
+                            name={props.favorite ? 'heart' : 'heart-o'}
+                            type='font-awesome'
+                            color= '#f50'
+                            onPress ={()=>props.favorite ? console.log('Alerady') : props.onPress()}
+                        >
+                        </Icon>
+                        <Icon 
+                            raised
+                            reverse
+                            name='pencil'
+                            type='font-awesome'
+                            color= '#512da8'
+                            onPress ={()=>props.onSelect()}
+                        >
+                        </Icon>
+                    </View>
+                </Card>
+            </Animatable.View>
+            
     )}
         else{
             return(<View></View>)
@@ -60,13 +64,15 @@ const RenderComments = (props) => {
     );
 
     return(
-        <Card title='Comments'>
-            <FlatList 
-                data = {comments}
-                renderItem = {renderCommentItem}
-                keyExtractor = {item => item.id.toString()}
-            />
-        </Card>
+        <Animatable.View animation='fadeInUp' duration= {2000} delay= {1000}>
+            <Card title='Comments'>
+                <FlatList 
+                    data = {comments}
+                    renderItem = {renderCommentItem}
+                    keyExtractor = {item => item.id.toString()}
+                />
+            </Card>
+        </Animatable.View>
     );
 }
 
