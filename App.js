@@ -4,7 +4,7 @@ import {ConfigureStore} from './redux/configureStore';
 import { PersistGate } from 'redux-persist/es/integration/react';
 
 import Main from './components/MainComponent';
-import Loading from './components/LoadingComponent';
+import {Loading} from './components/LoadingComponent';
 
 const {persistor, store} = ConfigureStore();
 
