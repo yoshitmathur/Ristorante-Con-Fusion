@@ -15,6 +15,7 @@ import About from './AboutComponent';
 import Dishdetail from './DishDetailComponent';
 import Reservation from './ReservationComponent';
 import Favorites from './FavoriteComponent';
+import Login from './LoginComponent';
 
 const MenuNavigator = createAppContainer(createStackNavigator({
     Menu: { 
@@ -120,6 +121,24 @@ const ReservationNavigator = createAppContainer(createStackNavigator({
 },
 ));
 
+const LoginNavigator = createAppContainer(createStackNavigator({
+    Login: { 
+        screen: Login,
+        navigationOptions: ({navigation}) => ({
+            headerStyle: {
+                backgroundColor: '#512da8'
+            },
+            headerTintColor: '#fff',
+            headreTitleStyle: {
+                color: '#fff'
+            },
+            headerLeft: <Icon name='menu' size={24} color='white' onPress={()=>navigation.openDrawer()} />
+        })
+    },
+    Dishdetail: { screen: Dishdetail },
+},
+));
+
 
 
 const CustomDrawerContentComponent = (props) => (
@@ -146,7 +165,18 @@ const CustomDrawerContentComponent = (props) => (
 
 
 const MainNavigator = createAppContainer(createDrawerNavigator({
-    HomeComponents: { 
+    Login: { 
+        screen: LoginNavigator,
+        navigationOptions: {
+            title: 'Login',
+            drawerLabel: 'Login',
+            drawerIcon: ({tintColor}) => (
+                <Icon name='sign-in' size={24} color={tintColor} type='font-awesome' /> 
+            )
+        }
+    },
+    
+    Home: { 
         screen: HomeNavigator,
         navigationOptions: {
             title: 'Home',
@@ -168,7 +198,7 @@ const MainNavigator = createAppContainer(createDrawerNavigator({
         }
     },
   
-    MENU: { 
+    Menu: { 
         screen: MenuNavigator,
         navigationOptions: {
             title: 'Menu',
@@ -212,6 +242,7 @@ const MainNavigator = createAppContainer(createDrawerNavigator({
         }
     },
 }, {
+        initialRouteName: 'Home',
         contentComponent: CustomDrawerContentComponent,
         drawerBackgroundColor: '#D1C4E9',
 }));
