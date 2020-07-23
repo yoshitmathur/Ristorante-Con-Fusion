@@ -6,9 +6,13 @@ import {baseUrl} from '../shared/baseUrl';
 import * as Animatable from 'react-native-animatable';
 
 import { Loading } from './LoadingComponent';
+import {DISHES} from '../shared/Dishes';
 
 
 class Menu extends Component {
+    state={
+        dishes: DISHES
+    }
 
     static navigationOptions = {
         title: 'Menu'

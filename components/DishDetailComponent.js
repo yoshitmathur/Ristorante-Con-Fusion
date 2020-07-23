@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, ScrollView, FlatList, Modal, StyleSheet, Button, Alert, PanResponder } from 'react-native';
+import { Text, View, ScrollView, FlatList, Modal, StyleSheet, Button, Alert, PanResponder, Share } from 'react-native';
 import { Card, Icon, Rating, Input } from 'react-native-elements';
 import {connect} from 'react-redux';
 import {baseUrl} from '../shared/baseUrl';
@@ -7,6 +7,8 @@ import * as Animatable from 'react-native-animatable';
 
 import { postFavorite } from '../redux/ActionCreators';
 import { postComment } from '../redux/ActionCreators';
+
+import {DISHES} from '../shared/Dishes';
 
 class RenderDish extends Component {
 
@@ -54,6 +56,16 @@ class RenderDish extends Component {
         }
     });
 
+    shareDish = (title, message, url) => {
+        Share.share({
+            title: title,
+            message: title + ": " + message + " " + url,
+            url: url
+        }, {
+            dialogTitle: 'Share' + title
+        });
+    }
+
     render() {
         const dish = this.props.dish;
 
@@ -87,6 +99,14 @@ class RenderDish extends Component {
                                 type='font-awesome'
                                 color='#512DA8'
                                 onPress={() => this.props.onSelect()}
+                            />
+                            <Icon
+                                raised
+                                reverse
+                                name={'share'}
+                                type='font-awesome'
+                                color='#51d2A8'
+                                onPress={() => this.shareDish(dish.name, dish.description, baseUrl+dish.image)}
                             />
                         </View>
                     </Card>
@@ -125,6 +145,7 @@ const RenderComments = (props) => {
 
 class Dishdetail extends Component {
     state = {
+        dishes: DISHES,
         showModal: false,
         rating: 0,
         author: '',
