@@ -28,7 +28,7 @@ const MenuNavigator = createAppContainer(createStackNavigator({
             headreTitleStyle: {
                 color: '#fff'
             },
-            headerLeft: <Icon name='menu' size={24} color='white' onPress={()=>navigation.openDrawer()} />
+            headerLeft: () => <Icon name='menu' size={24} color='white' onPress={()=>navigation.openDrawer()} />
         })
     },
     Dishdetail: { screen: Dishdetail },
@@ -46,7 +46,7 @@ const HomeNavigator = createAppContainer(createStackNavigator({
             headreTitleStyle: {
                 color: '#fff'
             },
-            headerLeft: <Icon name='menu' size={24} color='white' onPress={()=>navigation.toggleDrawer()} />
+            headerLeft: () => <Icon name='menu' size={24} color='white' onPress={()=>navigation.toggleDrawer()} />
         }) 
     }
 },
@@ -63,7 +63,7 @@ const ContactNavigator = createAppContainer(createStackNavigator({
             headreTitleStyle: {
                 color: '#fff'
             },
-            headerLeft: <Icon name='menu' size={24} color='white' onPress={()=>navigation.toggleDrawer()} />
+            headerLeft: () => <Icon name='menu' size={24} color='white' onPress={()=>navigation.toggleDrawer()} />
         })
     }
 },
@@ -80,7 +80,7 @@ const AboutNavigator = createAppContainer(createStackNavigator({
             headreTitleStyle: {
                 color: '#fff'
             },
-            headerLeft: <Icon name='menu' size={24} color='white' onPress={()=>navigation.toggleDrawer()} />
+            headerLeft: () => <Icon name='menu' size={24} color='white' onPress={()=>navigation.toggleDrawer()} />
         }) 
     }
 },
@@ -97,7 +97,7 @@ const FavoriteNavigator = createAppContainer(createStackNavigator({
             headreTitleStyle: {
                 color: '#fff'
             },
-            headerLeft: <Icon name='menu' size={24} color='white' onPress={()=>navigation.toggleDrawer()} />
+            headerLeft: () => <Icon name='menu' size={24} color='white' onPress={()=>navigation.toggleDrawer()} />
         }) 
     }
 },
@@ -114,7 +114,7 @@ const ReservationNavigator = createAppContainer(createStackNavigator({
             headreTitleStyle: {
                 color: '#fff'
             },
-            headerLeft: <Icon name='menu' size={24} color='white' onPress={()=>navigation.openDrawer()} />
+            headerLeft: () => <Icon name='menu' size={24} color='white' onPress={()=>navigation.openDrawer()} />
         })
     },
     Dishdetail: { screen: Dishdetail },
@@ -132,7 +132,7 @@ const LoginNavigator = createAppContainer(createStackNavigator({
             headreTitleStyle: {
                 color: '#fff'
             },
-            headerLeft: <Icon name='menu' size={24} color='white' onPress={()=>navigation.openDrawer()} />
+            headerLeft: () => <Icon name='menu' size={24} color='white' onPress={()=>navigation.openDrawer()} />
         })
     },
     Dishdetail: { screen: Dishdetail },
